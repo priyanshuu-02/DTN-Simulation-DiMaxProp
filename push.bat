@@ -1,7 +1,7 @@
 @echo off
 echo ============================================================
 echo   Pushing ONE Simulator to GitHub (branch: main)
-echo   Target: https://github.com/RaushanShrivastwa/DTN_Simulation.git
+echo   Target: https://github.com/priyanshuu-02/DTN-Simulation-DiMaxProp.git
 echo ============================================================
 echo.
 git push -u origin main

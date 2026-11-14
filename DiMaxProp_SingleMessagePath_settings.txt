@@ -1,0 +1,104 @@
+Scenario.name = DiMaxProp_SingleMessagePath
+
+Scenario.simulateConnections = true
+Scenario.updateInterval = 0.1
+Scenario.endTime = 2000
+
+
+# ==================================================
+# NETWORK INTERFACE
+# ==================================================
+
+Scenario.interfaces = Interface1
+
+Interface1.type = SimpleBroadcastInterface
+Interface1.transmitSpeed = 250k
+Interface1.transmitRange = 100
+
+
+# ==================================================
+# SMALL SIMULATION AREA
+# ==================================================
+
+MovementModel.worldSize = 300, 300
+MovementModel.rngSeed = 1
+
+
+# ==================================================
+# ONLY ONE MESSAGE: M1
+# ==================================================
+
+Events.nrof = 1
+
+Events1.class = MessageEventGenerator
+
+Events1.interval = 100, 100
+Events1.time = 0, 0
+
+Events1.size = 500k, 500k
+
+# Source = p0
+Events1.hosts = 0, 1
+
+# Destination = c5
+Events1.tohosts = 5, 6
+
+Events1.prefix = M
+
+
+# ==================================================
+# DIMAXPROP ROUTER
+# ==================================================
+
+Group.router = DiMaxPropRouter
+Group.lambda = 0.5
+Group.alpha = 1.0
+Group.probSetMaxSize = 50
+
+
+# ==================================================
+# TWO GROUPS
+# ==================================================
+
+Scenario.nrofHostGroups = 2
+
+
+# ==================================================
+# PEDESTRIANS
+# ==================================================
+
+Group.movementModel = RandomWaypoint
+
+Group.bufferSize = 50M
+
+Group.nrofInterfaces = 1
+Group.interface1 = Interface1
+
+
+Group1.groupID = p
+Group1.nrofHosts = 4
+
+Group1.speed = 0.5, 1.5
+Group1.waitTime = 0, 20
+
+
+# ==================================================
+# CARS
+# ==================================================
+
+Group2.groupID = c
+Group2.nrofHosts = 2
+
+Group2.speed = 2.7, 5.0
+Group2.waitTime = 0, 20
+
+
+# ==================================================
+# REPORTS
+# ==================================================
+
+Report.nrofReports = 2
+Report.reportDir = reports/
+Report.report1 = MessageStatsReport
+Report.report2 = MessageDeliveryReport
+

@@ -1,0 +1,72 @@
+# ==========================================================
+# DiMaxProp Single Message Lifecycle Test Simulation
+# ==========================================================
+
+Scenario.name = DiMaxProp_Lifecycle
+Scenario.simulateConnections = true
+Scenario.updateInterval = 0.1
+Scenario.endTime = 2000
+
+# ---------------- Network Interface ----------------
+Scenario.interfaces = Interface1
+
+Interface1.type = SimpleBroadcastInterface
+Interface1.transmitSpeed = 250k
+Interface1.transmitRange = 100
+
+# ---------------- World Area ----------------
+MovementModel.worldSize = 300, 300
+MovementModel.rngSeed = 1
+
+# ---------------- Single Target Message M1 ----------------
+Events.nrof = 1
+Events1.class = MessageEventGenerator
+Events1.interval = 100, 100
+Events1.time = 0, 0
+Events1.size = 500k, 500k
+
+# Source = p0 (host address 0)
+Events1.hosts = 0, 1
+
+# Destination = c5 (host address 5)
+Events1.tohosts = 5, 6
+
+Events1.prefix = M
+
+# ==========================================================
+# DiMaxProp Router Parameters Under Test
+# ==========================================================
+Group.router = DiMaxPropRouter
+Group.lambda = 0.5
+Group.alpha = 1.0
+Group.probSetMaxSize = 50
+Group.strictNextHop = false
+
+# ---------------- Host Groups ----------------
+Scenario.nrofHostGroups = 2
+
+# Common group settings
+Group.movementModel = RandomWaypoint
+Group.bufferSize = 50M
+Group.nrofInterfaces = 1
+Group.interface1 = Interface1
+
+# Group 1: 4 Pedestrians (p0, p1, p2, p3)
+Group1.groupID = p
+Group1.nrofHosts = 4
+Group1.speed = 0.5, 1.5
+Group1.waitTime = 0, 20
+
+# Group 2: 2 Cars (c4, c5)
+Group2.groupID = c
+Group2.nrofHosts = 2
+Group2.speed = 2.7, 5.0
+Group2.waitTime = 0, 20
+
+# ---------------- Reports ----------------
+Report.nrofReports = 3
+Report.reportDir = reports/
+Report.report1 = DiMaxPropLifecycleReport
+Report.report2 = MessageStatsReport
+Report.report3 = DistanceDelayReport
+

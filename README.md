@@ -162,13 +162,14 @@ Events1.tohosts = 0, 6    # Any node from 0 to 5 can be a destination
 In the group settings, set the router class:
 ```properties
 # Available routers:
+# - DiMaxPropRouter
 # - ImprovedProphetRouter
 # - ProphetRouter
 # - EpidemicRouter
 # - SprayAndWaitRouter
 # - MaxPropRouter
 # - DirectDeliveryRouter
-Group.router = ImprovedProphetRouter
+Group.router = DiMaxPropRouter
 ```
 
 #### B. Tuning Forwarding & Routing Parameters
